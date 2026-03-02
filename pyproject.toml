@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mllm-prompt-template"
+version = "1.0.0"
+description = "A Python template library for Multimodal LLMs that extends string.Template to support image substitution in prompts"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "co-gy", email = "948628463@qq.com"}
+]
+keywords = ["llm", "multimodal", "template", "prompt", "image"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: General",
+]
+dependencies = [
+    "Pillow>=9.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/co-gy/mllm-prompt-template"
+Repository = "https://github.com/co-gy/mllm-prompt-template"
+
+[tool.setuptools]
+packages = ["mllm_prompt_template"]
