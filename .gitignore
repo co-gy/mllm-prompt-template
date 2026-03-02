@@ -66,7 +66,3 @@ venv.bak/
 # OS
 .DS_Store
 Thumbs.db
-
-# Project specific
-example/*.jpg
-example/*.png
