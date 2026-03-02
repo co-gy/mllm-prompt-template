@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mllm-prompt-template"
-version = "1.0.0"
+version = "1.0.1"
 description = "A Python template library for Multimodal LLMs that extends string.Template to support image substitution in prompts"
 readme = "README.md"
 requires-python = ">=3.8"
