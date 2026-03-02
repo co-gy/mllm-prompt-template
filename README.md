@@ -2,6 +2,19 @@
 
 A Python template library for Multimodal LLMs(MLLMs) that extends Python's `string.Template` to support image substitution in prompts.
 
+```python
+# ❌
+from string import Template
+prompt = Template("Extract all text from the image. \n image: $img").safe_substitute(
+    img=Image.open("photo.jpg")
+)
+# ✅
+from mllm_prompt_template import Template
+prompt = Template("Extract all text from the image. \n image: $img").safe_substitute(
+    img=Image.open("photo.jpg")
+)
+```
+
 ## Installation
 
 ```bash
