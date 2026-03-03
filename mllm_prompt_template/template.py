@@ -5,29 +5,47 @@ import base64
 import re
 
 
-class Template:
-    def __init__(self, prompt_template: str):
-        self.prompt_template: StringTemplate = StringTemplate(prompt_template)
-        self.prompt: str = self.prompt_template.safe_substitute()
+class Template(StringTemplate):
+    def __init__(self, template: str):
+        super().__init__(template)
+        self.prompt = template
         self.text_var = {}
         self.image_var = {}
 
-
     def __str__(self):
-        return self.prompt
+        template = shorten(self.template, 30)
+        all_var = {**self.text_var, **self.image_var}
+        var_str = ", ".join([f"{var}={shorten(str(all_var.get(var, f'${var}')), 30)}" for var in self.get_identifiers()])
+        return f"Template('{template}'|{var_str})"
 
     def __repr__(self):
-        return self.prompt
-        
-    def safe_substitute(self, **kwargs) -> str:
-        for k, v in kwargs.items():
+        return f"Template('{shorten(self.template, 30)}')"
+    
+    def substitute(self, mapping=None, /, **kws):
+        if mapping is None:
+            mapping = {}
+        all_mapping = {**mapping, **kws}
+        for k, v in all_mapping.items():
             if isinstance(v, Image.Image):
                 self.image_var[k] = v
-                self.prompt = StringTemplate(self.prompt).safe_substitute(**{k: f"<<<Image({k}): {v}>>>"})
+                all_mapping[k] = f"<<<Image({k}): {v}>>>"
             else:
                 self.text_var[k] = f"{v}"
-                self.prompt = StringTemplate(self.prompt).safe_substitute(**{k: v})
-        return self
+        self.prompt = super().substitute(all_mapping)
+        return self.prompt
+
+    def safe_substitute(self, mapping=None, /, **kws):
+        if mapping is None:
+            mapping = {}
+        all_mapping = {**mapping, **kws}
+        for k, v in all_mapping.items():
+            if isinstance(v, Image.Image):
+                self.image_var[k] = v
+                all_mapping[k] = f"<<<Image({k}): {v}>>>"
+            else:
+                self.text_var[k] = f"{v}"
+        self.prompt = super().safe_substitute(all_mapping)
+        return self.prompt
     
     def to_messages(self):
         messages = [{

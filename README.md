@@ -5,12 +5,14 @@ A Python template library for Multimodal LLMs(MLLMs) that extends Python's `stri
 ```python
 # ❌
 from string import Template
-prompt = Template("Extract all text from the image. \n image: $img").safe_substitute(
+template = Template("Extract all text from the image. \n image: $img")
+template.safe_substitute(
     img=Image.open("photo.jpg")
 )
 # ✅
 from mllm_prompt_template import Template
-prompt = Template("Extract all text from the image. \n image: $img").safe_substitute(
+template = Template("Extract all text from the image. \n image: $img")
+template.safe_substitute(
     img=Image.open("photo.jpg")
 )
 ```
@@ -28,20 +30,20 @@ from mllm_prompt_template import Template
 from PIL import Image
 
 # Create template with image placeholders
-prompt_template = """
+prompt_template = Template("""
 这个人是$name, 这是他的自拍照:
 $img
 $name很可爱对不对
-"""
+""")
 
 # Substitute text and image variables
-prompt = Template(prompt_template).safe_substitute(
+prompt_template.safe_substitute(
     name="co-gy",
     img=Image.open("photo.jpg")
 )
 
 # Convert to OpenAI-style message format
-messages = prompt.to_messages()
+messages = prompt_template.to_messages()
 
 # Call MLLM (example with OpenAI-compatible API)
 import openai
