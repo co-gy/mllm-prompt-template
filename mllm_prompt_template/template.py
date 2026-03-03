@@ -1,5 +1,6 @@
 from PIL import Image
 from string import Template as StringTemplate
+from textwrap import shorten
 from io import BytesIO
 import base64
 import re
