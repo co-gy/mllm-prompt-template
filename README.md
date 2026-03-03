@@ -61,8 +61,8 @@ print(response.choices[0].message.content)
 
 ## API
 
-- `Template(prompt_template: str)` - Create template
-- `safe_substitute(**kwargs)` - Substitute variables (supports strings and PIL Images)
+- `Template(template: str)` - Create template
+- `substitute(**kwargs)`/`safe_substitute(**kwargs)` - Substitute variables (supports strings and PIL Images)
 - `to_messages()` - Convert to OpenAI-style message format
 
 ## Requirements
