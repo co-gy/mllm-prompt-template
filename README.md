@@ -6,13 +6,13 @@ A Python template library for Multimodal LLMs(MLLMs) that extends Python's `stri
 # ❌
 from string import Template
 template = Template("Extract all text from the image. \n image: $img")
-template.safe_substitute(
+prompt = template.safe_substitute(
     img=Image.open("photo.jpg")
 )
 # ✅
 from mllm_prompt_template import Template
 template = Template("Extract all text from the image. \n image: $img")
-template.safe_substitute(
+prompt = template.safe_substitute(
     img=Image.open("photo.jpg")
 )
 ```
@@ -37,13 +37,13 @@ $name很可爱对不对
 """)
 
 # Substitute text and image variables
-prompt_template.safe_substitute(
+prompt = prompt_template.safe_substitute(
     name="co-gy",
     img=Image.open("photo.jpg")
 )
 
 # Convert to OpenAI-style message format
-messages = prompt_template.to_messages()
+messages = prompt.to_messages()
 
 # Call MLLM (example with OpenAI-compatible API)
 import openai
