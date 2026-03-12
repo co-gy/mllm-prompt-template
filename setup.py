@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="mllm-prompt-template",
-    version="1.0.2",
+    version="2.0.0",
     author="co-gy",
     author_email="948628463@qq.com",
     description="A Python template library for multimodal large language models (MLLM) that supports image substitution in prompts",
